@@ -20,7 +20,7 @@ def get_books(user_input):
 
         df = pd.DataFrame(response)
         if df.empty:
-            return "No books found for this author."
+            return "No books found for this author "
         else:
             return df
     else:
@@ -53,16 +53,16 @@ def add_book(name, sales, review, author):
         query = """INSERT INTO book ("name", number_of_sales, reviews, author_id) 
                    VALUES (%s, %s, %s, %s)"""
         db.insert_row(query, (name, sales, review, author_id), database_config)
-        print(f"Book '{name}' added successfully!")
-        return f"Book '{name}' added successfully!", ""
+        print(f"Book '{name}' added successfully ")
+        return f"Book '{name}' added successfully ", ""
     else:
-        return f"Author '{author}' not found.", ""
+        return f"Author '{author}' not found ", ""
 
 
 def delete_book(name):
     if name:
         db.delete_row(name, database_config)
-        return f"Book '{name}' deleted successfully."
+        return f"Book '{name}' deleted successfully"
     else:
         return "Book name is mandatory for delete"
 
@@ -74,13 +74,13 @@ def table_change(table, author_name):
     if isinstance(original_table, pd.DataFrame) and isinstance(table, pd.DataFrame):
         diff = original_table.compare(table)
         if not diff.empty:
-            print("Changes detected:", diff)
+            print("Changes detected: ", diff)
             return diff
         else:
-            print("No changes detected.")
+            print("No changes detected")
             return original_table
     else:
-        print("Invalid data for comparison.")
+        print("Invalid data for comparison")
         return table
 
 
@@ -90,8 +90,8 @@ def start_gui_app():
         gr.HTML("""
         <style>
             .gradio-container {
-                background-color: #f0f0f0; /* Fundal gri deschis */
-                border-radius: 15px; /* Colțuri rotunjite */
+                background-color: #f0f0f0;
+                border-radius: 15px;
                 padding: 20px;
             }
             #author_input {
@@ -100,12 +100,12 @@ def start_gui_app():
                 padding: 10px;
             }
             #get_books_button {
-                background-color: #4CAF50; /* Buton verde */
+                background-color: #4CAF50;
                 color: white;
                 border-radius: 5px;
             }
             #get_books_button:hover {
-                background-color: #45a049; /* Culoare mai închisă la hover */
+                background-color: #45a049;
             }
             #results_table {
                 border: 1px solid #ddd;
